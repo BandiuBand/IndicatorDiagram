@@ -42,7 +42,7 @@ public class DiagramParserExecutor {
             try {
                 return makeFiles(file, target.getPath()).stream().collect(Collectors.joining("\n"));
             } catch (Exception e) {
-                return "Виникла помилка:"+ e.getMessage();
+                e.printStackTrace();
             }
         }
         return "Не вдалось створити папку для файлів у:"+targetFolder.getPath();

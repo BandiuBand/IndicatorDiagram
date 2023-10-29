@@ -7,6 +7,9 @@ module com.bandiu.javafxapp.indicatordiagram {
     requires com.sun.jna;
     requires org.apache.poi.poi;
     requires org.apache.poi.ooxml;
+    requires javafx.media;
+
+
     opens com.bandiu.javafxapp to javafx.fxml;
     exports com.bandiu.javafxapp;
     exports com.bandiu.javafxapp.model;

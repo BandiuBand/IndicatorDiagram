@@ -110,15 +110,12 @@ public class MainExcecutor {
 
     private static void addPresureCurve(ArrayList<Cyl> cyls, PTable table){
         int amountOfCyl = cyls.size();
-        table.setCell(0,0,"Angle");
+
         int nAngls = cyls.get(0).getPressures().length;
         double k = ((double)(nAngls+1))/((double)360);
         for (int i = 0; i < nAngls; i++) {
             double curAngl = ((double) i/k)-(180.00/k);
             table.setCell(i+1,0,curAngl);
-        }
-        for (int i = 1; i <= cyls.size(); i++) {
-            table.setCell(0,i,"Cyl#"+i);
         }
         for (int i = 0; i < nAngls; i++) {
             for (int j = 0; j < amountOfCyl; j++) {
