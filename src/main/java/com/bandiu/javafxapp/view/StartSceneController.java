@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 public class StartSceneController {
 
     private static String DATABASE_PATH = "/src/main/java/resources/Database";
+    private static String TAMPLATE_PATH = "/src/main/java/resources/tamplates";
     @FXML
     public ListView<String> listOfChoisenFiles;
     @FXML
@@ -43,19 +44,26 @@ public class StartSceneController {
 
     }
     private void initializeDatabase() throws URISyntaxException {
-        File jarLocation = new File(getClass().getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
-        File parentDirectory = jarLocation.getParentFile();
-        File db = new File(parentDirectory, "Database");
-        DATABASE_PATH = db.getPath();
-        if (!db.exists()) {
 
-            if (!db.mkdir()) {
-                System.err.println("Не вдалося створити папку.");
-            }
-        }
+        TAMPLATE_PATH = getParentFolderPath("tamplate");
+        DiagramParserExecutor.setTemplateDirectory(new File(TAMPLATE_PATH));
+
+        DATABASE_PATH = getParentFolderPath("Database");
         DiskFileSync.setReceivedFolder(DATABASE_PATH);
         DiskFileSync.setTargetFolder("E:\\DiagramParser\\2023");
         DiskFileSync.setFolderMode(true);
+    }
+    private String getParentFolderPath(String name) throws URISyntaxException{
+        File jarLocation = new File(getClass().getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
+        File parentDirectory = jarLocation.getParentFile();
+        File folder = new File(parentDirectory, name);
+        if (!folder.exists()) {
+
+            if (!folder.mkdir()) {
+                System.err.println("Не вдалося створити папку.");
+            }
+        }
+        return  folder.getPath();
     }
 
     public List<FileItem> getFileItems(){
@@ -162,7 +170,7 @@ public class StartSceneController {
     }
     private String saveAsExcelToFolder(String filePath,String folder){
         DiagramParserExecutor diagramParser = new DiagramParserExecutor(filePath,folder);
-        //DiagramParserExecutor.setTemplateDirectory(tamplateDirectory);
+        //DiagramParserExecutor.setTemplateDirectory(new File(TAMPLATE_PATH));
         return diagramParser.execute();
     }
 
