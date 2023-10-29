@@ -11,6 +11,7 @@ public class Cyl {
         private ArrayList<Integer> peakPressures = new ArrayList<>();
         private Double averagePeakPressure;
         private double rpm=0;
+        private double pScav = 0;
 
         public Cyl(int cylNumber){
             this.cylNumber = cylNumber;

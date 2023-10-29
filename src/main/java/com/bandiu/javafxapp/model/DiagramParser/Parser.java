@@ -226,6 +226,31 @@ private int parseStrokes(){
     }
     return strokes;
 }
+
+    private void parsePscav(){
+        if (testMode)
+            System.out.println("Start parsing scav pressure");
+        int index = finderIndex("DATE");
+        while (isEmptyLine(lines[index])) {
+            index++;
+            if (index>2000)
+                throw new RuntimeException("Can`t find line of scav pressure");
+        }
+        double pScav = 0;
+        try {
+            pScav =Double.parseDouble(lines[index]);
+            for (Cyl cyl:cyls) {
+                cyl.setPscav(pScav);
+            }
+        } catch (Exception e)
+        {
+            System.out.println("Cant parse double" + lines[index] + "\n"+e.getMessage());
+        }
+
+        if (testMode)
+            System.out.println("The scav pressure: " + pScav);
+
+    }
 private void parseDataTime(){
     if (testMode)
         System.out.println("Start parsing date");
