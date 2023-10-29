@@ -17,7 +17,7 @@
             <Button fx:id="addToListFromDB" layoutX="331.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleAddFromDatabase" prefHeight="22.0" prefWidth="240.0" text="Добавити в список з бази данних" />
             <Button fx:id="deleteFromList" layoutX="69.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleRemoveFromList" prefHeight="22.0" prefWidth="230.0" text="Видалити з списку" />
             <Button fx:id="chooseDBfolder" layoutX="69.0" layoutY="359.0" mnemonicParsing="false" onAction="#handleChooseDBfolder" prefHeight="22.0" prefWidth="230.0" text="Вибрати папку бази данних" />
-             <Button fx:id="chooseTamplatefolder" layoutX="341.0" layoutY="359.0" mnemonicParsing="false" onAction="#handleСhooseTamplatefolder" prefHeight="22.0" prefWidth="230.0" text="Вибрати папку шаблонів" />
+             <Button fx:id="chooseTamplatefolder" layoutX="341.0" layoutY="359.0" mnemonicParsing="false" onAction="#handleСhooseTemplatefolder" prefHeight="22.0" prefWidth="230.0" text="Вибрати папку шаблонів" />
             <Label fx:id="selectedMeasurementsLabel" layoutX="69.0" layoutY="45.0" prefHeight="14.0" prefWidth="502.0" text="Вибрані вимірювання:" />
          </children>
     </AnchorPane>

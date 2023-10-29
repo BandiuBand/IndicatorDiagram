@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class StartSceneController {
 
     private static String DATABASE_PATH = "/src/main/java/resources/Database";
-    private static String TAMPLATE_PATH = "/src/main/java/resources/tamplates";
+    private static String TEMPLATE_PATH = "/src/main/java/resources/tamplates";
     @FXML
     public ListView<String> listOfChoisenFiles;
     @FXML
@@ -35,7 +35,7 @@ public class StartSceneController {
     @FXML
     public void initialize() {
         try {
-            initializeDatabase();
+            initializePaths();
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
@@ -43,10 +43,10 @@ public class StartSceneController {
         listenerOfChoiceListElement();
 
     }
-    private void initializeDatabase() throws URISyntaxException {
+    private void initializePaths() throws URISyntaxException {
 
-        TAMPLATE_PATH = getParentFolderPath("tamplate");
-        DiagramParserExecutor.setTemplateDirectory(new File(TAMPLATE_PATH));
+        TEMPLATE_PATH = getParentFolderPath("template");
+        DiagramParserExecutor.setTemplateDirectory(new File(TEMPLATE_PATH));
 
         DATABASE_PATH = getParentFolderPath("Database");
         DiskFileSync.setReceivedFolder(DATABASE_PATH);
@@ -80,6 +80,7 @@ public class StartSceneController {
         waitingAlert.show();
 
         DiskFileSync diskFileSync = new DiskFileSync();
+        DiskFileSync.setFolderMode(false);
         boolean success = diskFileSync.start();
         waitingAlert.close();
         if(success) {
@@ -117,7 +118,7 @@ public class StartSceneController {
         }
     }
     @FXML
-    public void handleСhooseTamplatefolder() {
+    public void handleСhooseTemplatefolder() {
         String folder = folderChooser();
         if (folder!=null){
             DiagramParserExecutor.setTemplateDirectory(new File(folder));

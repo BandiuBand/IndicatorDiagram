@@ -16,9 +16,8 @@ public class DiagramParserExecutor {
 
     private Parser parser;
     private static String getTemplatesFolder(){
-        String userDir = System.getProperty("user.dir");
-        String templatePath = userDir + File.separator + "Templates";
-        return templatePath;
+        
+        return "./app/template/";
     }
 
     public static void setTemplateDirectory(File templateDirectory) {
