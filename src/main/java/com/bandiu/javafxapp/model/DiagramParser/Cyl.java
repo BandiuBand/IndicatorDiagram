@@ -9,14 +9,40 @@ public class Cyl {
 
         private int indicatedPower=0;
         private ArrayList<Integer> peakPressures = new ArrayList<>();
+        private Double averagePeakPressure;
         private double rpm=0;
 
         public Cyl(int cylNumber){
             this.cylNumber = cylNumber;
         }
 
+    public void setPscav(double pScav) {
+        this.pScav = pScav;
+    }
+
+    public double getpScav() {
+        return pScav;
+    }
+
     public double getRpm() {
         return rpm;
+    }
+    public double getAveragePeakPressure(){
+            if (averagePeakPressure == null)
+            {
+                setAveragePeakPressure();
+            }
+            return averagePeakPressure.doubleValue();
+    }
+
+    private void setAveragePeakPressure(){
+            int sumPressures = 0;
+            if (peakPressures!=null&&!peakPressures.isEmpty()){
+                for (int p:peakPressures) {
+                    sumPressures = sumPressures+p;
+                }
+            }else throw new RuntimeException("peakPressures must be filled");
+            averagePeakPressure = (double)sumPressures/(double)peakPressures.size();
     }
 
     public void setRpm(double rpm) {
@@ -26,7 +52,7 @@ public class Cyl {
     public void setIndicatedPower(int indicatedPower) {
         this.indicatedPower = indicatedPower;
     }
-    public int getMaxPresureAngle(){
+    public int getMaxPressureAngle(){
             int angle = 0;
             double maxPresure = 0;
         for (int i = 0; i < pressures.length; i++) {
