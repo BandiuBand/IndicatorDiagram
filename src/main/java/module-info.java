@@ -8,6 +8,7 @@ module com.bandiu.javafxapp.indicatordiagram {
     requires org.apache.poi.poi;
     requires org.apache.poi.ooxml;
     requires javafx.media;
+    requires commons.math3;
 
 
     opens com.bandiu.javafxapp to javafx.fxml;

@@ -6,7 +6,8 @@ public class Cyl {
 
         private int cylNumber;
         private double[] pressures = new double[359];
-
+        private double[] pressuresAfterFilter = null;
+        private double[] anglesAfterFilter = null;
         private int indicatedPower=0;
         private ArrayList<Integer> peakPressures = new ArrayList<>();
         private Double averagePeakPressure;
