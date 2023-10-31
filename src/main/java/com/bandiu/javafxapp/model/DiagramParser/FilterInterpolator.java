@@ -69,8 +69,13 @@ public class FilterInterpolator {
             resY[indexFrom+1+i]=newY[i];
         }
         for (int i = 0; i < x.length-indexTo; i++) {
-            resX[indexFrom+newX.length+1+i]=x[i+indexTo];
-            resY[indexFrom+newX.length+1+i]=y[i+indexTo];
+            int index = indexFrom+newX.length+i;
+            int indexNewX = newX.length;
+            System.out.println(index);
+            System.out.println(indexNewX);
+            System.out.println(i);
+            resX[index]=x[i+indexTo];
+            resY[index]=y[i+indexTo];
         }
         x=resX;
         y=resY;
@@ -88,7 +93,7 @@ public class FilterInterpolator {
         double[] resX = new double[steps];
         double[] resY = new double[steps];
 
-        for (int i = 0; i < steps; i++) {//toDo check maybe need steps-1
+        for (int i = 0; i < steps-1; i++) {//toDo check maybe need steps-1
             currentX+=stepX;
             resX[i] = currentX;
             resY[i] = spline.value(currentX);
