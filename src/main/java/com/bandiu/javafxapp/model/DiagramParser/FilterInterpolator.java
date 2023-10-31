@@ -93,7 +93,7 @@ public class FilterInterpolator {
         double[] resX = new double[steps];
         double[] resY = new double[steps];
 
-        for (int i = 0; i < steps-1; i++) {//toDo check maybe need steps-1
+        for (int i = 0; i < steps-1; i++) {
             currentX+=stepX;
             resX[i] = currentX;
             resY[i] = spline.value(currentX);
@@ -103,6 +103,24 @@ public class FilterInterpolator {
         res[1] = resY;
 
         return res;
+    }
+
+    public static void main(String[] args) {
+        double[] xV = new double[]{0.0,1.0,2.0,3.0,4.0};
+        double[] xY = new double[]{0.0,1.0,4.0,9.0,16.0};
+        FilterInterpolator filterInterpolator = new FilterInterpolator(xV,xY);
+
+        try {
+            filterInterpolator.interpolateFromToWidthStep(1,4,0.1);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        double[] resX = filterInterpolator.getNewX();
+        double[] resY = filterInterpolator.getNewY();
+
+        for (int i = 0; i < resX.length; i++) {
+            System.out.println(resX[i] +"  ;  "+resY[i]);
+        }
     }
 
 }
