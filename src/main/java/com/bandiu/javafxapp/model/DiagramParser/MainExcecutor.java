@@ -68,7 +68,7 @@ public class MainExcecutor {
         double apmax = cyl.getOptimizedMaxPressureAngle();
         double pmax = cyl.getAveragePeakPressure();
         double pexp = 0;//todo
-        double pscav = 0;//todo
+        double pscav = cyl.getP_Scav();
         double rpm = cyl.getRpm();
         double MIP = 0;//todo
         double pInd = cyl.getIndicatedPower();
