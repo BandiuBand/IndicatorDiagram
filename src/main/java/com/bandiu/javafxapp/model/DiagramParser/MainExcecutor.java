@@ -65,7 +65,7 @@ public class MainExcecutor {
     private static void addDataOfCyl(PTable table, Cyl cyl, int rowStart){
         double pTDC = cyl.getPressure(180);
 
-        double apmax = cyl.getMaxPressureAngle();//todo need Aproximate
+        double apmax = cyl.getOptimizedMaxPressureAngle();
         double pmax = cyl.getAveragePeakPressure();
         double pexp = 0;//todo
         double pscav = 0;//todo
