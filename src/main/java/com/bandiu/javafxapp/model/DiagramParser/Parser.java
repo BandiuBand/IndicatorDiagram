@@ -240,7 +240,7 @@ private int parseStrokes(){
         try {
             pScav =Double.parseDouble(lines[index]);
             for (Cyl cyl:cyls) {
-                cyl.setPscav(pScav);
+                cyl.setP_scav(pScav);
             }
         } catch (Exception e)
         {

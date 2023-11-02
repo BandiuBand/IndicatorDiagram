@@ -13,16 +13,29 @@ public class Cyl {
         private Double averagePeakPressure;
         private double rpm=0;
         private double pScav = 0;
+        private boolean isOptimised = false;
 
-        public Cyl(int cylNumber){
+    public double[] getPressuresAfterFilter() {
+        if (!isOptimised)
+            applyOptimisation();
+        return pressuresAfterFilter;
+    }
+
+    public double[] getAnglesAfterFilter() {
+        if (!isOptimised)
+            applyOptimisation();
+        return anglesAfterFilter;
+    }
+
+    public Cyl(int cylNumber){
             this.cylNumber = cylNumber;
         }
 
-    public void setPscav(double pScav) {
+    public void setP_scav(double pScav) {
         this.pScav = pScav;
     }
 
-    public double getpScav() {
+    public double getP_Scav() {
         return pScav;
     }
 
@@ -84,11 +97,37 @@ public class Cyl {
         return pressures;
     }
 
-    public void setPressure(double pressure, int angle) {
-            this.pressures[angle] = pressure;
+    public void setPressure(double pressure, int angle) {this.pressures[angle] = pressure;}
+    public double getPressure(int angle){return pressures[angle];}
+
+    public void applyOptimisation(){
+            FilterInterpolator filterInterpolator = new FilterInterpolator(pressures);
+            filterInterpolator.shiftScaleX(-180.0);
+            smoothChart(filterInterpolator);
+            splineChart(filterInterpolator);
+            anglesAfterFilter = filterInterpolator.getNewX();
+            pressuresAfterFilter = filterInterpolator.getNewY();
+            isOptimised = true;
+    }
+    private void smoothChart(FilterInterpolator filterInterpolator){
+        try {
+            filterInterpolator.smoothFromToWithWindow(-180,-10,6);
+            filterInterpolator.smoothFromToWithWindow(25,100,10);
+            filterInterpolator.smoothFromToWithWindow(100,180,5);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        public double getPressure(int angle){
-            return pressures[angle];
+
+    }
+    private void splineChart(FilterInterpolator filterInterpolator){
+        try {
+            filterInterpolator.interpolateFromToWidthStep(-5,3,0.25);
+            filterInterpolator.interpolateFromToWidthStep(8,14,0.25);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
+
+
+}
 

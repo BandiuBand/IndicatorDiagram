@@ -43,6 +43,8 @@ public class MainExcecutor {
 
         addPresureCurve(cyls,table);
 
+        addPressureCurveWithFilter(cyls,table);
+
         addCylsData(cyls,table);
 
     }
@@ -121,6 +123,26 @@ public class MainExcecutor {
             for (int j = 0; j < amountOfCyl; j++) {
                 table.setCell(i+1,j+1,cyls.get(j).getPressure(i));
             }
+        }
+    }
+
+    private static void addPressureCurveWithFilter(ArrayList<Cyl> cyls, PTable table){
+        int amountOfCyl = cyls.size();
+        addAnglesWithFilterFor(cyls.get(0),table);
+        for (int i = 0; i < amountOfCyl; i++) {
+            addPressureCurveWithFilterForOneCyl(cyls.get(i),table,i);
+        }
+    }
+    private static void addAnglesWithFilterFor(Cyl cyl,PTable table){
+        double[] angles = cyl.getAnglesAfterFilter();
+        for (int i = 0; i < angles.length; i++) {
+            table.setCell(i+1,35,angles[i]);
+        }
+    }
+    private static void addPressureCurveWithFilterForOneCyl(Cyl cyl,PTable table,int shift){
+        double[] pressures = cyl.getPressuresAfterFilter();
+        for (int i = 0; i < pressures.length; i++) {
+            table.setCell(i+1,36+shift,pressures[i]);
         }
     }
     protected static String openFile(String path){

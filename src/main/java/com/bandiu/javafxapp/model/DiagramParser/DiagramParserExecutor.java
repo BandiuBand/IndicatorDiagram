@@ -24,6 +24,19 @@ public class DiagramParserExecutor {
         DiagramParserExecutor.tamplateDirectory = templateDirectory;
     }
 
+    public DiagramParserExecutor(String file){
+        this.file=file;
+
+        String content = MainExcecutor.openFile(file);
+        parser = new Parser(content);
+
+
+    }
+
+    public Parser getParser() {
+        return parser;
+    }
+
     public DiagramParserExecutor(String file, String targetFolder){
         this.file=file;
         this.targetFolder = new File(targetFolder);
@@ -44,7 +57,9 @@ public class DiagramParserExecutor {
                 e.printStackTrace();
             }
         }
+        else
         return "Не вдалось створити папку для файлів у:"+targetFolder.getPath();
+        return "Eror";
     }
 
     private List<String> makeFiles(String pathToXL, String targetDirectory){
