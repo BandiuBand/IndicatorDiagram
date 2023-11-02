@@ -78,6 +78,17 @@ public class Cyl {
         }
         return angle;
     }
+    public double getOptimizedMaxPressureAngle(){
+        int angleIndex = 0;
+        double maxPresure = 0;
+        for (int i = 0; i < pressuresAfterFilter.length; i++) {
+            if (pressuresAfterFilter[i]>maxPresure){
+                angleIndex = i;
+                maxPresure = pressuresAfterFilter[i];
+            }
+        }
+        return anglesAfterFilter[angleIndex];
+    }
     public double getIndicatedPower() {
         return indicatedPower;
     }
