@@ -47,6 +47,8 @@ public class MainExcecutor {
 
         addCylsData(cyls,table);
 
+        addPeakPressure(cyls,table,40);
+
     }
 
     private static void addCylsData(ArrayList<Cyl> cyls, PTable table){
@@ -122,6 +124,20 @@ public class MainExcecutor {
         for (int i = 0; i < nAngls; i++) {
             for (int j = 0; j < amountOfCyl; j++) {
                 table.setCell(i+1,j+1,cyls.get(j).getPressure(i));
+            }
+        }
+    }
+    private static void addPeakPressure(ArrayList<Cyl> cyls, PTable table,int shift){
+        int amountOfCyl = cyls.size();
+
+        int samples = cyls.get(0).getPeakPressures().size();
+
+        for (int i = 0; i < samples; i++) {
+            table.setCell(i+1,shift,i+1);
+        }
+        for (int i = 0; i < samples; i++) {
+            for (int j = 0; j < amountOfCyl; j++) {
+                table.setCell(i+1,j+1+shift,cyls.get(j).getPeakPressures().get(i));
             }
         }
     }
