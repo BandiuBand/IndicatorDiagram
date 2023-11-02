@@ -47,7 +47,7 @@ public class MainExcecutor {
 
         addCylsData(cyls,table);
 
-        addPeakPressure(cyls,table,40);
+        addPeakPressure(cyls,table,45);
 
     }
 
