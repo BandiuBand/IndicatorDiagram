@@ -41,7 +41,7 @@ public class MainExcecutor {
     public static void addDataToTable(Parser parser, PTable table){
         ArrayList<Cyl> cyls = parser.getCyls();
 
-        addPresureCurve(cyls,table);
+        addPressureCurve(cyls,table);
 
         addPressureCurveWithFilter(cyls,table);
 
@@ -110,7 +110,7 @@ public class MainExcecutor {
         table.setCell(rowStart,cellIndex,"Pind");
     }
 
-    private static void addPresureCurve(ArrayList<Cyl> cyls, PTable table){
+    private static void addPressureCurve(ArrayList<Cyl> cyls, PTable table){
         int amountOfCyl = cyls.size();
 
         int nAngls = cyls.get(0).getPressures().length;
