@@ -27,6 +27,8 @@ private void start(){
     parsePressureCurve();
     parseIndicatedPower();
     parsePeakPressure();
+    parsePscav();
+    parseRpm();
 }
 private void splitToArrayList(){
 	lines = file.split("\n");
@@ -152,11 +154,57 @@ private void parseIndicatedPower(){
             System.out.println("\n");
         }
     }catch (Exception e) {
-        throw new RuntimeException(e);
+        throw new RuntimeException("Problem with parsing indicated power: "+e.getMessage());
     }
 
     }
 
+    private void parseRpm(){
+        int index = finderIndex("RPM");
+        while (isEmptyLine(lines[index])){
+            index++;
+            if (index>2000)
+                throw new RuntimeException("Can`t find RPM line");
+        }
+
+
+
+
+        try {
+            for (int i = 0; i < cyls.size(); i++) {
+
+                String line = lines[index+i];
+                if (testMode) {
+                    System.out.println("Start parsing RPM. line - \"" + line+"\"");
+                }
+                parseLineRpm(line,i);
+            }
+            if (testMode) {
+                System.out.println("Finish parsing.");
+                System.out.print("Result - ");
+                for (int i = 0; i < cyls.size(); i++) {
+                    System.out.print(cyls.get(i).getRpm() + "  ");
+                }
+                System.out.println("\n");
+            }
+        }catch (Exception e) {
+            throw new RuntimeException("Problem with parsing indicated power: "+e.getMessage());
+        }
+
+    }
+
+    private void parseLineRpm(String line, int cyl){
+        double rpm = 0.0;
+
+        try {
+            rpm =Double.parseDouble(line);
+            cyls.get(cyl).setRpm(rpm);
+        } catch (Exception e)
+        {
+            System.out.println("Cant parse double RPM in line - " + line + "\n"+e.getMessage());
+        }
+
+    }
 
     private void parsePeakPressure() {
 
@@ -230,7 +278,7 @@ private int parseStrokes(){
     private void parsePscav(){
         if (testMode)
             System.out.println("Start parsing scav pressure");
-        int index = finderIndex("DATE");
+        int index = finderIndex("PSCAV");
         while (isEmptyLine(lines[index])) {
             index++;
             if (index>2000)
